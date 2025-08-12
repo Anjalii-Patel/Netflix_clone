@@ -13,6 +13,7 @@ COPY requirements.txt requirements.txt
 
 # Upgrade pip first to avoid build issues
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+RUN pip install Pillow
 
 COPY . .
 
