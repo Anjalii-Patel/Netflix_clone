@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-@c0a1^gl_f*6i8jr1pps8@f06a)g*x%@m=hg6=$hz@=44m-#&j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +37,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # Third-party apps
+    'rest_framework',
+
+    # Local apps
+    'users',
+    'video_app',
 ]
 
 MIDDLEWARE = [
@@ -83,10 +90,10 @@ import os
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('DB_NAME', 'netflix_clone'),
-        'USER': os.environ.get('DB_USER', 'netflix_user'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'securepass'),
-        'HOST': os.environ.get('DB_HOST', 'db'),
+        'NAME': 'netflix_clone',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost', 
         'PORT': '3306',
     }
 }
@@ -112,6 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'users.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
