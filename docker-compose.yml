@@ -37,5 +37,18 @@ services:
     ports:
       - "6379:6379"
 
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./backend/media:/app/media
+    depends_on:
+      - backend
+
 volumes:
   db_data:
+  

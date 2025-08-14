@@ -4,3 +4,4 @@ djangorestframework-simplejwt
 mysqlclient
 redis
 Pillow
+django-cors-headers
