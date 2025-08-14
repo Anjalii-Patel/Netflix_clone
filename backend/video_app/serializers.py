@@ -11,10 +11,14 @@ class VideoSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['uploader']
 
+    # def get_file(self, obj):
+    #     request = self.context.get('request')
+    #     if obj.file:
+    #         if request:
+    #             return request.build_absolute_uri(obj.file.url)
+    #         return obj.file.url  # Fallback if request is None
+    #     return None
     def get_file(self, obj):
-        request = self.context.get('request')
         if obj.file:
-            if request:
-                return request.build_absolute_uri(obj.file.url)
-            return obj.file.url  # Fallback if request is None
+            return f"/media/videos/{obj.file.name.split('/')[-1]}"
         return None
