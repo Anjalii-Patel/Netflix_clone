@@ -1,5 +1,0 @@
-{"refresh":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1NTY3MDEwNCwiaWF0IjoxNzU1NTgzNzA0LCJqdGkiOiI1ZTljMWEwOTE3MDM0OGM5YjdlMzBkNmYxOWEwNzgxYyIsInVzZXJfaWQiOiIxIn0.REX6juqSc-UchYABuNEz2jn0UOnDNoti9ZBSgpVzZqw","access":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1NTg0MDA0LCJpYXQiOjE3NTU1ODM3MDQsImp0aSI6IjY3OTQzZTdiNTYwODQ0ZWE5M2U4YTkwMjI3ZjIzMzAyIiwidXNlcl9pZCI6IjEifQ.j_3cJFYGRKiPjvMF-8-IRd3xv-sU4zs2ObztXs1_bBw"}
-
-
-
-curl -v -X POST http://127.0.0.1:8000/api/videos/create/   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1NTg0MDA0LCJpYXQiOjE3NTU1ODM3MDQsImp0aSI6IjY3OTQzZTdiNTYwODQ0ZWE5M2U4YTkwMjI3ZjIzMzAyIiwidXNlcl9pZCI6IjEifQ.j_3cJFYGRKiPjvMF-8-IRd3xv-sU4zs2ObztXs1_bBw"   -F "title=Test Video"   -F "description=Demo upload"   -F "file=@/c/Users/anjal/Videos/Test_video.mp4"
