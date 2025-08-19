@@ -1,3 +1,4 @@
+# backend/users/views.py
 from django.shortcuts import render
 from rest_framework import generics
 from django.contrib.auth import get_user_model
