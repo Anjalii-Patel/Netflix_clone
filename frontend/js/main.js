@@ -1,51 +1,21 @@
-// fetch('http://localhost:8000/api/videos/')
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error(`HTTP error! Status: ${response.status}`);
-//         }
-//         return response.json();
-//     })
-//     .then(videos => {
-//         const container = document.getElementById('video-list');
-//         container.innerHTML = ''; // Clear old content if any
-
-//         videos.forEach(video => {
-//             container.innerHTML += `
-//                 <div class="col-md-3 mb-4">
-//                     <div class="card bg-secondary">
-//                         <video width="100%" controls>
-//                             <source src="${video.file}" type="video/mp4">
-//                             Your browser does not support the video tag.
-//                         </video>
-//                         <div class="card-body">
-//                             <h5 class="card-title">${video.title}</h5>
-//                             <p class="card-text">${video.description || ''}</p>
-//                         </div>
-//                     </div>
-//                 </div>
-//             `;
-//         });
-//     })
-//     .catch(err => console.error('Error fetching videos:', err));
-
+// frontend/js/main.js
 console.log("main.js loaded");
 
-const API_BASE = "http://localhost:8000/api/videos/";
+const VIDEO_API = "http://localhost:8000/api/videos/";
 
-// Fetch all videos from API
+// Fetch all videos
 async function fetchVideos() {
     try {
-        const res = await fetch(API_BASE);
+        const res = await apiFetch(VIDEO_API);
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        const videos = await res.json();
-        return videos;
+        return await res.json();
     } catch (err) {
         console.error("Error fetching videos:", err);
         return [];
     }
 }
 
-// Render video cards in a container
+// Render video cards
 function renderVideos(videos, containerId) {
     const container = document.getElementById(containerId);
     container.innerHTML = "";
@@ -66,8 +36,10 @@ function renderVideos(videos, containerId) {
 
 // Initialize homepage
 (async function init() {
+    checkAuth();
+    renderNav();
+
     const videos = await fetchVideos();
-    // Split into trending and recent for demo
     renderVideos(videos.slice(0, 5), "trending-row");
     renderVideos(videos.slice(5), "recent-row");
 })();
