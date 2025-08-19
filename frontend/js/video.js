@@ -9,7 +9,6 @@ function getQueryParam(param) {
 
 async function loadVideo() {
     const videoId = getQueryParam("id");
-    // console.log("Video ID from URL:", videoId);
 
     if (!videoId) {
         alert("No video selected.");
@@ -18,10 +17,7 @@ async function loadVideo() {
     }
 
     try {
-        // console.log("Fetching:", `${API_BASE}${videoId}/`);
         const res = await fetch(`${API_BASE}${videoId}/`);
-        // console.log("Response status:", res.status);
-
         if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
         }
@@ -29,14 +25,16 @@ async function loadVideo() {
         const video = await res.json();
         console.log("Video data:", video);
 
-        // Now update the DOM **inside this function**
+        // Update title + description
         document.getElementById("videoTitle").innerText = video.title;
         document.getElementById("videoDescription").innerText = video.description;
-        const player = document.getElementById("videoPlayer");
-        const source = document.getElementById("videoSource");
-        source.src = video.file;
-        // console.log("Video src set to:", video.file);
-        player.load();
+
+        // Initialize player and set HLS stream
+        const player = videojs("videoPlayer");
+        player.src({
+            src: video.playback_url,   // e.g. http://localhost:8000/media/hls/1/master.m3u8
+            type: "application/x-mpegURL"
+        });
 
     } catch (err) {
         console.error("Error loading video:", err);
