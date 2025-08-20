@@ -1,3 +1,4 @@
+# backend/video_app/models.py
 from django.db import models
 from django.conf import settings
 
@@ -11,11 +12,14 @@ class Video(models.Model):
     thumbnails = models.CharField(max_length=500, blank=True)
     status = models.CharField(
         max_length=50,
-        choices=[("pending", "Pending"), ("processing", "Processing"), ("ready", "Ready"), ("failed", "Failed")],
+        choices=[
+            ("pending", "Pending"),
+            ("processing", "Processing"),
+            ("ready", "Ready"),
+            ("failed", "Failed"),
+        ],
         default="pending"
     )
-    price = models.DecimalField(max_digits=7, decimal_places=2, default=0)
-    entitlement = models.JSONField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
