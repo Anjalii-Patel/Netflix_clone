@@ -1,5 +1,7 @@
 # backend/users/models.py
+from django.conf import settings
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
 class UserManager(BaseUserManager):
@@ -40,3 +42,25 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+    
+class SubscriptionPlan(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    price = models.DecimalField(max_digits=7, decimal_places=2)
+    duration_days = models.PositiveIntegerField(help_text="Number of days the plan is valid")  
+
+    def __str__(self):
+        return f"{self.name} (${self.price})"
+
+class Subscription(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    plan = models.ForeignKey(SubscriptionPlan, on_delete=models.CASCADE)
+    start_date = models.DateTimeField(default=timezone.now)
+    end_date = models.DateTimeField()
+    active = models.BooleanField(default=True)
+
+    def is_active(self):
+        return self.active and self.end_date > timezone.now()
+
+    def __str__(self):
+        return f"{self.user.username} - {self.plan.name}"
