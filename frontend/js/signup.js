@@ -7,6 +7,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
   const data = {
     username: document.getElementById("username").value,
     email: document.getElementById("email").value,
+    full_name: document.getElementById("full_name").value,  // NEW
     password: document.getElementById("password").value
   };
 
